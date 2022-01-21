@@ -1,11 +1,13 @@
 module.exports = {
     root: true,
-    env: {es6: true},
+    env: {
+        es6: true,
+    },
     parserOptions: {
         ecmaVersion: 'latest',
         sourceType: 'module',
     },
-    extends: ["eslint:recommended"],
+    extends: ['eslint:recommended'],
     rules: {
         'no-constructor-return': 'error',
         'no-duplicate-imports': ['warn', {
@@ -22,18 +24,18 @@ module.exports = {
             variables: true,
         }],
         'require-atomic-updates': 'error',
-        'arrow-body-style': ["error", "always"],
-        camelcase: 'error',
-        'capitalized-comments':['warn', 'always'],
+        'arrow-body-style': ['error', 'always'],
+        'camelcase': 'error',
+        'capitalized-comments': ['warn', 'always'],
         'consistent-return': 'warn',
-        curly: ['error', 'all'],
+        'curly': ['error', 'all'],
         'default-case': 'warn',
         'default-case-last': 'warn',
         'default-param-last': 'warn',
         'dot-notation': ['warn', {
             allowKeywords: false,
         }],
-        eqeqeq: ['warn', 'always', {
+        'eqeqeq': ['warn', 'always', {
             null: 'ignore',
         }],
         'func-name-matching': 'error',
@@ -42,10 +44,15 @@ module.exports = {
             allowArrowFunctions: true,
         }],
         'id-length': 'warn',
-        'id-match': ['warn', '^[a-z]+([A-Z][a-z]+)*$'],
+
+        /*
+         * I don't like using id-match because I can't exclude class names
+         * 'id-match': ['warn', '^[a-z]+([A-Z][a-z]+)*$'],
+         */
         'max-classes-per-file': ['warn', 1],
         'max-depth': 'warn',
         'max-lines-per-function': ['warn', {
+            max: 100,
             skipBlankLines: true,
             skipComments: true,
         }],
@@ -83,7 +90,8 @@ module.exports = {
         'no-script-url': 'error',
         'no-sequences': 'warn',
         'no-shadow': ['error', {
-            builtinGlobals: true, hoist: 'functions',
+            builtinGlobals: true,
+            hoist: 'functions',
         }],
         'no-ternary': 'error',
         'no-throw-literal': 'error',
@@ -112,14 +120,14 @@ module.exports = {
         'prefer-object-spread': 'warn',
         'prefer-promise-reject-errors': 'error',
         'prefer-template': 'warn',
-        'quote-props': ['error', 'as-needed'],
-        radix:['error', 'as-needed'],
+        'quote-props': ['error', 'consistent-as-needed'],
+        'radix': ['error', 'as-needed'],
         'require-unicode-regexp': 'error',
         'sort-imports': 'warn',
         'spaced-comment': 'warn',
-        strict: 'error',
+        'strict': 'error',
         'symbol-description': 'warn',
-        yoda: ['warn', 'never'],
+        'yoda': ['warn', 'never'],
         'array-bracket-newline': ['error', {
             minItems: 4,
         }],
@@ -137,12 +145,9 @@ module.exports = {
         'eol-last': ['warn', 'always'],
         'func-call-spacing': 'warn',
         'function-call-argument-newline': ['warn', 'consistent'],
-        'function-paren-newline': ['warn', {
-            minItems: 3,
-        }],
         'generator-star-spacing': ['warn', 'before'],
         'implicit-arrow-linebreak': ['warn', 'beside'],
-        indent: 'warn',
+        'indent': 'warn',
         'jsx-quotes': 'error',
         'key-spacing': 'warn',
         'keyword-spacing': 'warn',
@@ -151,66 +156,109 @@ module.exports = {
         'lines-between-class-members': ['warn', 'always', {
             exceptAfterSingleLine: true,
         }],
-        'max-len': 'warn',
         'max-statements-per-line': 'warn',
         'multiline-ternary': ['error', 'never'],
         'new-parens': 'error',
-        // 'newline-per-chained-call': ['warn', {
-        //     ignoreChainWithDepth: 3,
-        // }],
+
+        /*
+         * 'newline-per-chained-call': ['warn', {
+         *     ignoreChainWithDepth: 3,
+         * }],
+         */
         'no-extra-parens': 'warn',
         'no-multi-spaces': 'warn',
         'no-multiple-empty-lines': 'warn',
-        'no-trailing-spaces': 'warm',
+        'no-trailing-spaces': 'warn',
         'no-whitespace-before-property': 'warn',
         'object-curly-newline': ['warn', {
-            minProperties: 4,
+            ObjectExpression: {
+                minProperties: 1,
+            },
+            ObjectPattern: {
+                multiline: true,
+            },
+            ImportDeclaration: 'never',
+            ExportDeclaration: {
+                minProperties: 1,
+            },
         }],
         'object-curly-spacing': 'warn',
         // TODO test object-property-newline
         'object-property-newline': 'warn',
         'operator-linebreak': ['warn', 'after'],
         // 'padded-blocks': 'warn',
-        'padding-line-between-statements': ['warn', {
-            blankLine: 'always', prev: ['const', 'let'], next: '*'
-        }, {
-            blankLine: 'any', prev: ['const', 'let'], next: ['const', 'let']
-        }, {
-            blankLine: 'always', prev: 'directive', next: '*'
-        }, {
-            blankLine: 'any', prev: 'directive', next: 'directive'
-        }, {
-            blankLine: 'always', prev: ['case', 'default'], next: '*'
-        }, {
-            blankLine: 'always', prev: '*', next: 'return',
-        }, {
-            blankLine: 'always', prev: '*', next: 'class',
-        }, {
-            blankLine: 'always', prev: '*', next: 'do',
-        }, {
-            blankLine: 'always', prev: '*', next: 'import',
-        }, {
-            blankLine: 'any', prev: 'import', next: 'import',
-        }, {
-            blankLine: 'always', prev: '*', next: 'export',
-        }, {
-            blankLine: 'always', prev: '*', next: 'function',
-        }, {
-            blankLine: 'always', prev: '*', next: 'if',
-        }, {
-            blankLine: 'always', prev: '*', next: 'while',
-        }, {
-            blankLine: 'always', prev: '*', next: 'try',
-        }],
-        quotes: ['error', 'single', {
-            allowTemplateLiterals: true
+        'padding-line-between-statements': [
+            'warn', {
+                blankLine: 'always',
+                prev: ['const', 'let'],
+                next: '*',
+            }, {
+                blankLine: 'any',
+                prev: ['const', 'let'],
+                next: ['const', 'let'],
+            }, {
+                blankLine: 'always',
+                prev: 'directive',
+                next: '*',
+            }, {
+                blankLine: 'any',
+                prev: 'directive',
+                next: 'directive',
+            }, {
+                blankLine: 'always',
+                prev: ['case', 'default'],
+                next: '*',
+            }, {
+                blankLine: 'always',
+                prev: '*',
+                next: 'return',
+            }, {
+                blankLine: 'always',
+                prev: '*',
+                next: 'class',
+            }, {
+                blankLine: 'always',
+                prev: '*',
+                next: 'do',
+            }, {
+                blankLine: 'always',
+                prev: '*',
+                next: 'import',
+            }, {
+                blankLine: 'any',
+                prev: 'import',
+                next: 'import',
+            }, {
+                blankLine: 'always',
+                prev: '*',
+                next: 'export',
+            }, {
+                blankLine: 'always',
+                prev: '*',
+                next: 'function',
+            }, {
+                blankLine: 'always',
+                prev: '*',
+                next: 'if',
+            }, {
+                blankLine: 'always',
+                prev: '*',
+                next: 'while',
+            }, {
+                blankLine: 'always',
+                prev: '*',
+                next: 'try',
+            },
+        ],
+        'quotes': ['error', 'single', {
+            allowTemplateLiterals: true,
         }],
         'rest-spread-spacing': 'error',
-        semi: 'error',
+        'semi': 'error',
         'semi-spacing': 'error',
         'semi-style': 'error',
         'space-before-blocks': 'warn',
-        'space-before-function-paren': ['warn',{
+        'space-before-function-paren': ['warn', {
             anonymous: 'always',
             named: 'always',
             asyncArrow: 'never',
