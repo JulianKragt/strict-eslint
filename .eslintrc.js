@@ -6,6 +6,8 @@ module.exports = {
     parserOptions: {
         ecmaVersion: 'latest',
         sourceType: 'module',
+        ecmaFeatures: {
+            jsx: false,
     },
     extends: ['eslint:recommended'],
     rules: {
