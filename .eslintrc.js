@@ -3,13 +3,19 @@ module.exports = {
     env: {
         es6: true,
     },
+    parser: '@typescript-eslint/parser',
     parserOptions: {
         ecmaVersion: 'latest',
         sourceType: 'module',
-        ecmaFeatures: {
-            jsx: false,
     },
-    extends: ['eslint:recommended'],
+    plugins: [
+        '@typescript-eslint',
+    ],
+    extends: [
+        'eslint:recommended',
+        'plugin:@typescript-eslint/eslint-recommended',
+        'plugin:@typescript-eslint/recommended',
+    ],
     rules: {
         'no-constructor-return': 'error',
         'no-duplicate-imports': ['warn', {
@@ -26,7 +32,7 @@ module.exports = {
             variables: true,
         }],
         'require-atomic-updates': 'error',
-        'arrow-body-style': ['error', 'always'],
+        'arrow-body-style': ['error', 'as-needed'],
         'camelcase': 'error',
         'capitalized-comments': ['warn', 'always'],
         'consistent-return': 'warn',
@@ -45,7 +51,9 @@ module.exports = {
         'func-style': ['error', 'declaration', {
             allowArrowFunctions: true,
         }],
-        'id-length': 'warn',
+        'id-length': ['warn', {
+            exceptions: ['x', 'y', 'i'],
+        }],
 
         /*
          * I don't like using id-match because I can't exclude class names
@@ -95,7 +103,6 @@ module.exports = {
             builtinGlobals: true,
             hoist: 'functions',
         }],
-        'no-ternary': 'error',
         'no-throw-literal': 'error',
         'no-undef-init': 'warn',
         'no-underscore-dangle': 'warn',
@@ -121,7 +128,7 @@ module.exports = {
         'prefer-object-has-own': 'warn',
         'prefer-object-spread': 'warn',
         'prefer-promise-reject-errors': 'error',
-        'prefer-template': 'warn',
+        // 'prefer-template': 'warn',
         'quote-props': ['error', 'consistent-as-needed'],
         'radix': ['error', 'as-needed'],
         'require-unicode-regexp': 'error',
@@ -130,9 +137,7 @@ module.exports = {
         'strict': 'error',
         'symbol-description': 'warn',
         'yoda': ['warn', 'never'],
-        'array-bracket-newline': ['error', {
-            minItems: 4,
-        }],
+        'array-bracket-newline': ['error', 'consistent'],
         'array-bracket-spacing': ['warn', 'never'],
         'array-element-newline': ['warn', 'consistent'],
         'arrow-parens': ['warn', 'as-needed'],
@@ -170,24 +175,31 @@ module.exports = {
         'no-extra-parens': 'warn',
         'no-multi-spaces': 'warn',
         'no-multiple-empty-lines': 'warn',
-        'no-trailing-spaces': 'warn',
+        // TODO turn on after sometime
+        // 'no-trailing-spaces': 'warn',
         'no-whitespace-before-property': 'warn',
-        'object-curly-newline': ['warn', {
-            ObjectExpression: {
-                minProperties: 1,
-            },
-            ObjectPattern: {
-                multiline: true,
-            },
-            ImportDeclaration: 'never',
-            ExportDeclaration: {
-                minProperties: 1,
-            },
-        }],
+        // 'object-curly-newline': ['warn', {
+        //     ObjectExpression: {
+        //         minProperties: 2,
+        //     },
+        //     ObjectPattern: {
+        //         multiline: true,
+        //     },
+        //     ImportDeclaration: {
+        //         multiline: true,
+        //     },
+        //     ExportDeclaration: {
+        //         multiline: true,
+        //     },
+        // }],
         'object-curly-spacing': 'warn',
         // TODO test object-property-newline
-        'object-property-newline': 'warn',
-        'operator-linebreak': ['warn', 'after'],
+        'object-property-newline': [
+            'warn', {
+                allowAllPropertiesOnSameLine: true,
+            },
+        ],
+        'operator-linebreak': ['warn', 'before'],
         // 'padded-blocks': 'warn',
         'padding-line-between-statements': [
             'warn', {
@@ -259,12 +271,8 @@ module.exports = {
         'semi': 'error',
         'semi-spacing': 'error',
         'semi-style': 'error',
-        'space-before-blocks': 'warn',
-        'space-before-function-paren': ['warn', {
-            anonymous: 'always',
-            named: 'always',
-            asyncArrow: 'never',
-        }],
+        'space-before-blocks': ['warn', 'always'],
+        'space-before-function-paren': ['warn', 'never'],
         'space-in-parens': 'warn',
         'space-infix-ops': 'error',
         'space-unary-ops': 'warn',
@@ -275,5 +283,6 @@ module.exports = {
         'wrap-iife': 'warn',
         'wrap-regex': 'error',
         'yield-star-spacing': 'error',
+
     },
 };
